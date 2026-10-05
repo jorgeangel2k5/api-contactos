@@ -1,5 +1,9 @@
 import Contact from "../models/Contacto.js";
 
+
+
+
+
 // GET: Obtener todos
 const getContacts = async (req, res) => {
   const contactos = await Contact.find();
