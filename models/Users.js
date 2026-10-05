@@ -51,7 +51,7 @@ UserSchema.pre("save", async function () {
   this.password = bcrypt.hashSync(this.password, salt);
 });
 
-// Generar el código de verificación
+//genera el código de verificación
 UserSchema.methods.generateVerificationCode = function () {
   const code = Math.floor(100000 + Math.random() * 900000).toString();
   this.verificationCode = code;

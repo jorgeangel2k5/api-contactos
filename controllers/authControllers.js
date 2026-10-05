@@ -41,7 +41,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Buscamos el usuario por el email
+    //busca el usuario por el email
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -51,7 +51,7 @@ const login = async (req, res) => {
       });
     }
 
-    // Comparamos el password recibido con el de la base de datos
+    //compara el password recibido con el de la base de datos
     const isMatch = bcrypt.compareSync(password, user.password);
 
     if (!isMatch) {
@@ -61,7 +61,7 @@ const login = async (req, res) => {
       });
     }
 
-    // Aaquí cerramos la petición respondiendo con JSON
+    //aquí cerramos la petición respondiendo con JSON
     return res.json({
       ok: true,
       msg: "¡Login exitoso!",
