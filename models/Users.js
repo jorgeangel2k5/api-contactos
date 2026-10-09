@@ -25,7 +25,7 @@ const UserSchema = new Schema(
       enum: ["user", "admin", "superAdmin"],
       default: "user",
     },
-    emailVerifed: {
+    emailVerified: {
       type: Boolean,
       default: false,
     },
@@ -41,7 +41,7 @@ const UserSchema = new Schema(
   }
 );
 
-// Hasheo de contraseña
+// Hasheo de contraseña antes de guardar
 UserSchema.pre("save", async function () {
   if (!this.isModified("password")) {
     return;
@@ -51,12 +51,17 @@ UserSchema.pre("save", async function () {
   this.password = bcrypt.hashSync(this.password, salt);
 });
 
-//genera el código de verificación
+// Generar el código de verificación
 UserSchema.methods.generateVerificationCode = function () {
   const code = Math.floor(100000 + Math.random() * 900000).toString();
   this.verificationCode = code;
-  this.verificationCodeExpires = Date.now() + 15 * 60 * 1000; // 15 min
+  this.verificationCodeExpires = Date.now() + 15 * 60 * 1000; // 15 minutos de validez
   return code;
+};
+
+// Método para comparar contraseña en el login
+UserSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compareSync(candidatePassword, this.password);
 };
 
 export default model("User", UserSchema);
