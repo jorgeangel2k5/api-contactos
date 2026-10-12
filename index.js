@@ -2,12 +2,12 @@ import "dotenv/config";
 import express from 'express';
 import connectDB from './config/database.js';
 import contactRoutes from './routes/contactRoutes.js';
-import authRoutes from "./routes/auth.routes.js";
+import authRoutes from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
 
 
 const app = express();
-const port = 4500;
+const port = process.env.PORT || 4500;
 
 // Conexion con mongoDB
 connectDB();

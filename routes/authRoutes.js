@@ -5,8 +5,8 @@ import { registerValidation, loginValidation } from "../middlwares/validator.js"
 const router = Router();
 
 router.get("/", getUsers);
-router.post("/register", register);
 router.post("/login", loginValidation(), login);
+router.post("/register", registerValidation(), register);
 router.post("/verify-email", verifyEmail);
 
 

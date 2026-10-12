@@ -41,7 +41,7 @@ const UserSchema = new Schema(
   }
 );
 
-// Hasheo de contraseña antes de guardar
+// hasheo de contraseña antes de guardar
 UserSchema.pre("save", async function () {
   if (!this.isModified("password")) {
     return;
@@ -51,7 +51,7 @@ UserSchema.pre("save", async function () {
   this.password = bcrypt.hashSync(this.password, salt);
 });
 
-// Generar el código de verificación
+//para generar el codigo de verificacion
 UserSchema.methods.generateVerificationCode = function () {
   const code = Math.floor(100000 + Math.random() * 900000).toString();
   this.verificationCode = code;
@@ -59,7 +59,7 @@ UserSchema.methods.generateVerificationCode = function () {
   return code;
 };
 
-// Método para comparar contraseña en el login
+// con este metodo se compara la contraseña en el login
 UserSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compareSync(candidatePassword, this.password);
 };

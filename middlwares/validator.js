@@ -12,7 +12,7 @@ export const handleValidationErrors = (req, res, next) => {
   next();
 };
 
-// Validar Registro
+//para validar el registro
 export const registerValidation = () => [
   check("username")
     .notEmpty()
@@ -38,7 +38,7 @@ export const registerValidation = () => [
   handleValidationErrors,
 ];
 
-// Validar Login
+// para validar el Login
 export const loginValidation = () => [
   check("email")
     .isEmail()

@@ -1,8 +1,4 @@
-import Contact from "../models/Contacto.js";
-
-
-
-
+import Contact from "../models/Contact.js";
 
 // GET: Obtener todos
 const getContacts = async (req, res) => {
